@@ -15,10 +15,22 @@ namespace UnityStandardAssets._2D
         private Vector3 m_LastTargetPosition;
         private Vector3 m_CurrentVelocity;
         private Vector3 m_LookAheadPos;
-
+        //private float rightBound;
+        //private float leftBound;
+        //private float topBound;
+        //private float botBound;
+        //private SpriteRenderer spriteBounds;
         // Use this for initialization
         private void Start()
         {
+            //float vertExtent = Camera.main.orthographicSize;
+            //float horzExtent = vertExtent * Screen.width / Screen.height;
+
+            //spriteBounds = GameObject.Find("Background").GetComponentInChildren<SpriteRenderer>();
+            //leftBound = (float)(horzExtent - spriteBounds.sprite.bounds.size.x / 2.0f);
+            //rightBound = (float)(spriteBounds.sprite.bounds.size.x / 2.0f - horzExtent);
+            //botBound = (float)(vertExtent - spriteBounds.sprite.bounds.size.y / 2.0f);
+            //topBound = (float)(spriteBounds.sprite.bounds.size.y / 2.0f - vertExtent);
             m_LastTargetPosition = target.position;
             m_OffsetZ = (transform.position - target.position).z;
             transform.parent = null;
@@ -44,6 +56,8 @@ namespace UnityStandardAssets._2D
 
             Vector3 aheadTargetPos = target.position + m_LookAheadPos + Vector3.forward*m_OffsetZ;
             Vector3 newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref m_CurrentVelocity, damping);
+            //newPos.x = Mathf.Clamp(newPos.x, leftBound, rightBound);
+            //newPos.y = Mathf.Clamp(newPos.y, botBound, topBound);
 
             transform.position = newPos;
 
